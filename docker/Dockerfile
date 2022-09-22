@@ -17,9 +17,9 @@ ARG UID=1000
 ARG GID=1000
 ARG PASSWORD=user
 RUN groupadd -g $GID $GROUPNAME && \
-	useradd -m -s /bin/bash -u $UID g $GID -G sudo $USERNAME && \
-	echo $USERNAME:SPASSWORD | chpasswd && \
-	echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+  useradd -m -s /bin/bash -u $UID -g $GID -G sudo $USERNAME && \
+  echo $USERNAME:$PASSWORD | chpasswd && \
+  echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER $USERNAME
 
 WORKDIR /home/user/app
